@@ -23,7 +23,7 @@ CloudFormation do
     TransitGatewayRouteTableId Ref(:TransitGatewayRouteTableId)
   end
 
-  Condition(:HasRouteTableIds, FnNot(FnEquals(FnJoin('', [Ref(:RouteTableIds)]),'')))
+  Condition(:HasRouteTableIds, FnNot(FnEquals(FnJoin('', Ref(:RouteTableIds)),'')))
   tgw_routes = external_parameters.fetch(:tgw_routes, [])
   external_parameters.fetch(:max_availability_zones, 0).times do |az|
     tgw_routes.each_with_index do |dest_cidr, index|
