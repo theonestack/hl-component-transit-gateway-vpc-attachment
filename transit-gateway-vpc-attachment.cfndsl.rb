@@ -14,7 +14,9 @@ CloudFormation do
     Tags tags
   end
 
+  Condition(:HasTransitGatewayRouteTableId, FnNot(FnEquals(Ref(:TransitGatewayRouteTableId),'')))
   EC2_TransitGatewayRoute(:VpcGatewayRoute) do
+    Condition(:HasTransitGatewayRouteTableId)
     Blackhole 'false'
     DestinationCidrBlock Ref(:VpcCidr)
     TransitGatewayAttachmentId Ref(:NetworkVpcGatewayAttachment)
