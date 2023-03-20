@@ -1,0 +1,11 @@
+test_metadata:
+  type: config
+  name: custom_routes
+  description: custom vpc routes for the tgw attachment
+
+
+max_availability_zones: 2
+
+tgw_routes:
+  - 192.168.0.0/16
+  - 10.0.0.0/16
