@@ -30,6 +30,7 @@ CloudFormation do
 
       EC2_Route("CustomRoute#{az}#{index}") do
         Condition(:HasRouteTableIds)
+        DependsOn['NetworkVpcGatewayAttachment']
         RouteTableId FnSelect(az, Ref(:RouteTableIds))
         DestinationCidrBlock dest_cidr
         TransitGatewayId Ref(:TransitGatewayId)
